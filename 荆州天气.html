@@ -1,0 +1,43 @@
+<html>
+<title>荆州天气</title>
+<body>
+<script>
+if (window.XMLHttpRequest)
+{// code for IE7+, Firefox, Chrome, Opera, Safari
+xmlhttp=new XMLHttpRequest();
+
+}
+else
+{// code for IE6, IE5
+xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.open("GET","http://flash.weather.com.cn/wmaps/xml/jingzhou.xml",false);//XML数据来源,不是来源weatherWS
+xmlhttp.send();
+xmlDoc=xmlhttp.responseXML;
+
+document.write("<table border='1' width='60%' align='center'>");
+document.write("<tr><th>城区</th><th>天气</th><th>现在气温</th><th>最低气温</th><th>最高气温</th><th>湿度</th><th>风向</th><tr>");
+var x=xmlDoc.getElementsByTagName("city");
+for (i=0;i<x.length;i++)
+{
+document.write("<tr><td>");
+document.write(x[i].getAttribute("cityname"));
+document.write("</td><td>");
+document.write(x[i].getAttribute("stateDetailed"));
+document.write("</td><td>");
+document.write(x[i].getAttribute("temNow"));
+document.write("</td><td>");
+document.write(x[i].getAttribute("tem1"));
+document.write("</td><td>");
+document.write(x[i].getAttribute("tem2"));
+document.write("</td><td>");
+document.write(x[i].getAttribute("humidity"));
+document.write("</td><td>");
+document.write(x[i].getAttribute("windDir")+x[i].getAttribute("windPower"));
+document.write("</td></tr>");
+}
+document.write("</table>");
+</script>
+
+</body>
+</html>
